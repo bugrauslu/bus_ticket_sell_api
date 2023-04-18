@@ -33,9 +33,9 @@ The following software needs to be installed in order to run this project:
 **body**:{
 	*"email":"string",
 	"password":"String"*
-}
-headers:
-param:
+}<br>
+headers:<br>
+param:{}<br>
 
 
 response:{
@@ -44,12 +44,12 @@ response:{
 "token":  "String"
 },
 "message":  "Success"
-}
+}<br>
 
 
 ## url: http://localhost:3000/api/auth/register
 
-**METHOD**: POST
+**METHOD**: POST<br><br>
 **body**:{
 	"firstName":"String",
 	"lastName":"String",
@@ -57,41 +57,41 @@ response:{
 	"gender":Boolean,
 	"email":"String",
 	"password":"String"
-}
-headers:
-param:
+}<br>
+headers:<br>
+param:{}<br>
 
-gender 0 = female
-gender 1 = male
+gender 0 = female<br>
+gender 1 = male<br>
 
 **response**:{
-"success":  true,
-"data":  {
-		"firstName":  "String",
-		"lastName":  "String",
-		"age":  Number,
-		"gender":  Boolean, //
-		"email":  "String",
-		"_id":  "643ea3aeb29b8eac32a1957f",
-		"createdAt":  "2023-04-18T14:05:34.425Z",
-		"updatedAt":  "2023-04-18T14:05:34.425Z",
-		"__v":  0
-},
-"message":  "User Created"
-}
+"success":  true,<br>
+"data":  {<br>
+		"firstName":  "String",<br>
+		"lastName":  "String",<br>
+		"age":  Number,<br>
+		"gender":  Boolean,<br>
+		"email":  "String",<br>
+		"_id":  "643ea3aeb29b8eac32a1957f",<br>
+		"createdAt":  "2023-04-18T14:05:34.425Z",<br>
+		"updatedAt":  "2023-04-18T14:05:34.425Z",<br>
+		"__v":  0<br>
+},<br>
+"message":  "User Created"<br>
+}<br>
 
 ## url: http://localhost:3000/api/journey/addJourney
 
-**METHOD**: POST
-**body**:{
-		"departure":"String",
-		"destination":"String",
-		"departureTime":"2023-04-18T10:00:00Z",
-		"price":Number
+**METHOD**: POST<br>
+**body**:{<br>
+		"departure":"String",<br>
+		"destination":"String",<br>
+		"departureTime":"2023-04-18T10:00:00Z",<br>
+		"price":Number<br>
 }
 
-headers:{ token:"String" }
-param:
+headers:{ token:"String" }<br>
+param:<br>
 
 **response**:
 "success":  true,
@@ -122,9 +122,9 @@ seatNumber:50]
 
 ## http://localhost:3000/api/journey/List
 
-**METHOD**: POST
-headers:{ token:"String" }
-param:
+**METHOD**: POST<br>
+headers:{ token:"String" }<br>
+param:<br>
 **body**:{		
 "departure":"istanbul",
 "destination":"izmir",
@@ -172,9 +172,9 @@ param:
 
 ## url: http://localhost:3000/api/journey/buyTicket/:id
 
-**METHOD**: POST
-headers:{ token:"String" }
-param: id = journeyId
+**METHOD**: POST<br>
+headers:{ token:"String" }<br>
+param: id = journeyId<br>
 **body**:{
 "seatIds":  ["643e6dd6677764f67691ea87"],
 "genders":  [0]
@@ -189,10 +189,10 @@ gender 1= male
 
 ## url: http://localhost:3000/api/journey/Detail/:id
 
-**METHOD**: POST
-headers:{ token:"String" }
-param: id = journeyId
-**body**:{}
+**METHOD**: POST<br>
+headers:{ token:"String" }<br>
+param: id = journeyId<br>
+**body**:{}<br>
 **response**:{
 "success":  true,
 "message":  "success"
@@ -200,10 +200,10 @@ param: id = journeyId
 
 ## url: http://localhost:3000/api/journey/Detail/:id
 
-**METHOD**: POST
-headers:{ token:"String" }
-param: id = journeyId
-**body**:{}
+**METHOD**: POST<br>
+headers:{ token:"String" }<br>
+param: id = journeyId<br>
+**body**:{}<br>
 **response**:{
 "success":  true,
 "data":  {
@@ -230,12 +230,12 @@ param: id = journeyId
 "message":  "success"
 
 
-## url: http://localhost:3000/api/tickets/list
+## url: http://localhost:3000/api/tickets/list 
 
 
-headers:{ token:"String" }
-**body**:{}
-**response**:{
+headers:{ token:"String" }<br>
+**body**:{}<br>
+**response**:{<br>
 "success":  true,
 "data":  [{
 "_id":  "643e6e64677764f67691eb26",
@@ -275,10 +275,10 @@ headers:{ token:"String" }
 }
 ## url: http://localhost:3000/api/tickets/list
 
-headers:{ token:"String" }
-params:{id:ticketId}
-**body**:{}
-**response**:{"success":  true,
+headers:{ token:"String" }<br>
+params:{id:ticketId}<br>
+**body**:{}<br>
+**response**:{"success":  true,<br>
 "data":  {
 "_id":  "643e6e64677764f67691eb26",
 "userId":  "643e6d53677764f67691e947",
