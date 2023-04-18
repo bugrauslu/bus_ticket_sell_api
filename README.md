@@ -79,13 +79,13 @@ If you have any questions or feedback, please contact me at [bugrauslu@protonmai
 Logs in an existing user with the provided email and password. The request should include a JSON payload in the following format:
 
 id=journeyId
-params:{id:"string"},
-headers:{token:"string"}
+params:{id:"string"},<br>
+headers:{token:"string"}<br>
 body:{
 {
     "seatIds":["string"] (SeatIds can be added more than once)
     "genders":[0 OR 1] (1 for male, 0 for female (`OPTIONAL` default user.gender)
-}
+}<br>
 }
 
 
