@@ -4,8 +4,8 @@
 		"logLevel":"info"
 	},
 	"dbConfig":{
-		"name":"Bugra",
-		"password":"khnnmjbL6iMrTwC6"
+		"name":"YOURDBNAME",
+		"password":"YOURDBPASSWORD"
 	},
 	"jwtConfig":{
 		"jwt_secret": "myS33!!creeeT",
