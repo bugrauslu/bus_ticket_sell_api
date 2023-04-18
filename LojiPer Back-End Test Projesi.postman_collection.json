@@ -1,0 +1,298 @@
+{
+	"info": {
+		"_postman_id": "f6ffd994-2533-4568-9140-b23ff083ce00",
+		"name": "LojiPer Back-End Test Projesi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\":\"bugrauslu@protonmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"fatma\",\r\n    \"lastName\":\"uslu\",\r\n    \"age\":18,\r\n    \"gender\":false,\r\n    \"email\":\"fatma@protonmail.com\",\r\n    \"password\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Journeys",
+			"item": [
+				{
+					"name": "addJourney",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"departure\":\"ankara\",\r\n   \"destination\":\"istanbul\",\r\n   \"departureTime\":\"2023-04-18T10:00:00Z\",\r\n   \"price\":\"500\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/journey/addJourney",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"journey",
+								"addJourney"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listJourney",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2MyZDhhMzgwYzM3YWNlYTMzOTdmMyIsImlhdCI6MTY4MTY3NjQ5NCwiZXhwIjoxNjgxNzEyNDk0fQ.89g_PaS6sCDslKK54cExro07OK7WGxkn530xZN2sRQ0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2U2ZDUzNjc3NzY0ZjY3NjkxZTk0NyIsImlhdCI6MTY4MTgyNTUxMywiZXhwIjoxNjgxODYxNTEzfQ.2G7TirKeTg5IJaAO9DiVGMhZ_341nx4Bhmb_77QssyA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"departure\":\"istanbul\",\r\n   \"destination\":\"izmir\",\r\n   \"departureTime\":\"2023-04-18\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/journey/List",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"journey",
+								"List"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BuyTicket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2U2ZDUzNjc3NzY0ZjY3NjkxZTk0NyIsImlhdCI6MTY4MTgyNTUxMywiZXhwIjoxNjgxODYxNTEzfQ.2G7TirKeTg5IJaAO9DiVGMhZ_341nx4Bhmb_77QssyA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n       \"seatIds\": [\"643e30a14b2d2abc4ce98bea\"],\r\n       \"genders\": [0]\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/journey/buyTicket/643e6dd6677764f67691ea86",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"journey",
+								"buyTicket",
+								"643e6dd6677764f67691ea86"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "JourneyDetail",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2MyZDhhMzgwYzM3YWNlYTMzOTdmMyIsImlhdCI6MTY4MTc1OTIxOCwiZXhwIjoxNjgxNzk1MjE4fQ.X4HfNd6QrMgqfdjz9985w7_LtqTXqoAYgNxZTVa9d20",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/journey/Detail/643daf685d240b5090684e95",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"journey",
+								"Detail",
+								"643daf685d240b5090684e95"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tickets",
+			"item": [
+				{
+					"name": "listTicket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2U2ZDUzNjc3NzY0ZjY3NjkxZTk0NyIsImlhdCI6MTY4MTgyNTUxMywiZXhwIjoxNjgxODYxNTEzfQ.2G7TirKeTg5IJaAO9DiVGMhZ_341nx4Bhmb_77QssyA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/journey/Detail/643e6dd6677764f67691ea86",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"journey",
+								"Detail",
+								"643e6dd6677764f67691ea86"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "detailTicket",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0M2U2ZDUzNjc3NzY0ZjY3NjkxZTk0NyIsImlhdCI6MTY4MTgyNTUxMywiZXhwIjoxNjgxODYxNTEzfQ.2G7TirKeTg5IJaAO9DiVGMhZ_341nx4Bhmb_77QssyA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/api/tickets/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"tickets",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
