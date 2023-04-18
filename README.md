@@ -16,8 +16,8 @@ The application will run by default at `http://localhost:3000`.
 
 This project has the following endpoints:
 
+<hr>
 - `POST /api/auth/register`: Registers a new user.
-
 ### `POST /api/auth/register`
 
 Registers a new user with the provided user data. The request must contain a JSON payload in the following format the request must be discarded from the body
@@ -38,7 +38,7 @@ body:{
 - `email` (string): The user's email address.
 - `password` (string): The user's password.
 
-
+<hr>
 - `POST /api/auth/login`: Logs in an existing user.
 ### `POST /api/auth/login`
 
@@ -54,6 +54,7 @@ body:{
 - `password` (string): The user's password.
 
 
+<hr>
 - `POST /api/journey/addJourney`: Logs in an existing user.
 ### `POST /api/journey/addJourney`
 
