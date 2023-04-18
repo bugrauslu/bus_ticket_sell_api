@@ -97,9 +97,9 @@ const buyTicket =async(req,res)=>{
                 }else{
                     
                     if (genders[i] === 1) 
-                        genders[i]=true
+                        genders[i] = true
                     else
-                        genders[i]=false
+                        genders[i] = false
                     //yan koltuk cinsiyet kontrolü satın alınmak istenen cinsiyet
                     if (findedAnotherSeat[0].gender === genders[i] || seatObj.gender===null ) {
                         const userTickets = {
@@ -110,14 +110,12 @@ const buyTicket =async(req,res)=>{
                             departureTime:findedJourney.departureTime,
                             seatNumber:seatObj.seatNumber
                         }
-                    await ticektsModel.create(userTickets)
-                    await JourneyModel.findAndUpdate(data)
-                      
+                        await ticektsModel.create(userTickets)
+                        await JourneyModel.findAndUpdate(data)
                     }else{
                         return Response.error400(res,"gender mismatch")
                     }
                 }
-                
             } else{
                 //koltuk başka birisi tarafından alınmıştır
                 return Response.error400(res,"This seat was bought by someone else")
