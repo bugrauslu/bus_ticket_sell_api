@@ -40,7 +40,7 @@ body:{
 - `password` (string): The user's password.
 
 <hr>
-- `POST /api/auth/login`: Logs in an existing user.
+- `POST /api/auth/login`: Login with user
 
 ### `POST /api/auth/login`
 
@@ -52,12 +52,9 @@ body:{
 }
 
 
-- `email` (string): The user's email address.
-- `password` (string): The user's password.
-
 
 <hr>
-- `POST /api/journey/addJourney`: Logs in an existing user.
+- `POST /api/journey/addJourney`: 
 
 ### `POST /api/journey/addJourney`
 
@@ -74,4 +71,24 @@ body:{
 
 If you have any questions or feedback, please contact me at [bugrauslu@protonmail.com].
 
+
+<hr>
+- `POST /api/journey/buyTicket/:id`:buy bus ticket
+### `POST /api/journey/buyTicket/:id`
+
+Logs in an existing user with the provided email and password. The request should include a JSON payload in the following format:
+
+id=journeyId
+params:{id:"string"},
+headers:{token:"string"}
+body:{
+{
+    "seatIds":["string"] (SeatIds can be added more than once)
+    "genders":[0 OR 1] (1 for male, 0 for female (`OPTIONAL` default user.gender)
+}
+}
+
+
+- `email` (string): The user's email address.
+- `password` (string): The user's password.
 
