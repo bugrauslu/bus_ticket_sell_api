@@ -8,13 +8,13 @@ const router = express.Router();
 router.post("/addJourney", JourneyController.addJourney);
 
 //LISTJOURNEY
-router.post("/List", verifyToken.verifyToken , JourneyController.listJourney);
+router.post("/list", verifyToken.verifyToken , JourneyController.listJourney);
 
-//BuyTicket
+//BUYTICKET
 router.post("/buyTicket/:id",verifyToken.verifyToken ,JourneyController.buyTicket)
 
-
-router.post("/Detail/:id",verifyToken.verifyToken ,JourneyController.journeyDetail)
+//TICKETDETAIL
+router.post("/detail/:id",verifyToken.verifyToken ,JourneyController.journeyDetail)
 
 
 

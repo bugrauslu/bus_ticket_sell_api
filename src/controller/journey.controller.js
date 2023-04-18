@@ -6,11 +6,13 @@ import crypto from "crypto";
 import JWT from "../middleware/jwt.middleware";
 import userModel from "../model/user.model";
 import { ObjectId, ReturnDocument } from "mongodb";
+import ticektsModel from "../model/ticekts.Model";
 
 const addJourney = async (req, res) => {
    try {
     const data= req.body;
     const savedJourney =  await JourneyModel.create(data)
+    return Response.created(res,"success",savedJourney)
    } catch (error) {
     console.log("addJourney: ",error)
     return Response.error404(res,"an unexpected error")
@@ -22,6 +24,7 @@ const addJourney = async (req, res) => {
 const listJourney = async (req, res) => {
     try {
         const data = req.body;
+        console.log(data);
         let startOfDay = new Date(req.body.departureTime);
         startOfDay.setHours(0, 0, 0, 0) 
 
@@ -29,7 +32,8 @@ const listJourney = async (req, res) => {
         endOfDay.setHours(23, 59, 59, 999) 
       
         const query = { departure:data.departure , destination:data.destination,departureTime: { $gte: startOfDay.toISOString() , $lte: endOfDay.toISOString() }};
-        const findedJourney = await JourneyModel.find(query)
+        let param = { seats: 0 }
+        const findedJourney = await JourneyModel.find(query,param)
         if (!findedJourney) {
             return Response.error400(res,"journey is not found!")
         }else{
@@ -41,44 +45,25 @@ const listJourney = async (req, res) => {
        }
 };
 
-// const journeyLength = findedJourney.seats.length;
-// const newSeats = []
-// for (let i = 0; i < journeyLength; i++) {
-//     if (seatNumbers[i] === findedJourney.seats[i].seatNumber) { 
-//       for (let j = 0; j < genders.length; j++) {
-//         let changedData  = {
-//             _id: findedJourney.seats[i]._id,
-//             group: findedJourney.seats[i].group ,
-//             seatNumber :findedJourney.seats[i].seatNumber,
-//             isAvailable: false,
-//             gender:genders[i],
-//             buyersId:userId
-//            }
-//            findedJourney.seats[i] = changedData;
-//       }
-//     }
-//     newSeats.push(findedJourney.seats[i])
-    
-// }
-// const updateJourney = await JourneyModel.update({_id:journeyId},{seats:newSeats})
-// return Response.success(res,"asd",updateJourney)
-
-
-const checkAnotherSeat = (arra)=>{
-
-}
 
 const buyTicket =async(req,res)=>{
      try {
-        const {seatIds , genders} = req.body;
+        let {seatIds , genders} = req.body;
         const journeyId = req.params.id;
         const userId = req.user.id
+
         const findedUser = await userModel.findOne({_id:userId})
-        const userGender = findedUser.gender;
+        let defaultGender = findedUser.gender === false ? 0 : 1;
+        if(!genders){
+            genders = [];
+            genders[0] = defaultGender
+        }
+        
         const findedJourney = await JourneyModel.findOne({_id:journeyId});
         if (!findedJourney) {
             return Response.error400(res,"journey not found")
         }
+
         if (seatIds.length >= 6 || seatIds.length <= 0) {
             return Response.error400(res,"you can choose up to 5 seats")
         }
@@ -89,7 +74,6 @@ const buyTicket =async(req,res)=>{
                 gender:genders[i],
                 buyersId:userId
             }
-
             const JourneyCheck = await JourneyModel.find({ _id: data.id, "seats._id": new ObjectId(data.seatId) })
             //alınacak koltuğu bul
             const seatObj = JourneyCheck[0].seats.find(seat => seat._id.equals(new ObjectId(data.seatId)));
@@ -100,23 +84,48 @@ const buyTicket =async(req,res)=>{
                 const findedAnotherSeat = await JourneyModel.findGroup(seatObj._id,seatObj.group);
                 console.log(findedAnotherSeat);
                 if (findedAnotherSeat[0].buyersId === userId) {
-                       await JourneyModel.findAndUpdate(data)
+                    const userTickets = {
+                        userId:userId,
+                        destination:findedJourney.destination,
+                        departure:findedJourney.departure,
+                        price:findedJourney.price,
+		                departureTime:findedJourney.departureTime,
+                        seatNumber:seatObj.seatNumber
+                    }
+                    await ticektsModel.create(userTickets)
+                    await JourneyModel.findAndUpdate(data)
                 }else{
-                    if (findedAnotherSeat[0].gender === genders[i] || !findedAnotherSeat[0].gender) {
-                        console.log("buraya girdi");
-                       await JourneyModel.findAndUpdate(data)
+                    
+                    if (genders[i] === 1) 
+                        genders[i]=true
+                    else
+                        genders[i]=false
+                    //yan koltuk cinsiyet kontrolü satın alınmak istenen cinsiyet
+                    if (findedAnotherSeat[0].gender === genders[i] || seatObj.gender===null ) {
+                        const userTickets = {
+                            userId:userId,
+                            destination:findedJourney.destination,
+                            departure:findedJourney.departure,
+                            price:findedJourney.price,
+                            departureTime:findedJourney.departureTime,
+                            seatNumber:seatObj.seatNumber
+                        }
+                    await ticektsModel.create(userTickets)
+                    await JourneyModel.findAndUpdate(data)
                       
                     }else{
                         return Response.error400(res,"gender mismatch")
                     }
                 }
-
+                
             } else{
                 //koltuk başka birisi tarafından alınmıştır
                 return Response.error400(res,"This seat was bought by someone else")
             }       
         }     
+        return Response.success(res,"success")
     } catch (error) {
+        console.log("buyTicket",error);
         return Response.error404(res,"an unexpected error")
     }
 }
@@ -128,9 +137,9 @@ const journeyDetail =async(req,res)=>{
         if (!findedJourney) {
             return Response.error400(res,"journey not found",findedJourney);
         }
-        return Response.success(res,"success",findedJourney[0])
+        return Response.success(res,"success",findedJourney)
     } catch (error) {
-        console.log(error);
+        console.log("journeyDetail",error);
         return Response.error404(res,"an unexpected error")
     }
 }

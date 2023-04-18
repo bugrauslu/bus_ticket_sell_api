@@ -26,7 +26,7 @@ const JourneySchema  = new Schema(
             type: Date,
             required: true
           },
-          fare: {
+          price: {
             type: Number,
             required: true
           },
@@ -61,9 +61,8 @@ const create = async(Data) => {
 };
 
 
-const find = async(query) => {
-
-	const findedBusRoute = await Journeys.find(query);
+const find = async(query,param) => {
+	const findedBusRoute = await Journeys.find(query,param);
 	return findedBusRoute;
 };
 
