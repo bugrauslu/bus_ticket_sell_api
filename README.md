@@ -18,6 +18,7 @@ This project has the following endpoints:
 
 <hr>
 - `POST /api/auth/register`: Registers a new user.
+
 ### `POST /api/auth/register`
 
 Registers a new user with the provided user data. The request must contain a JSON payload in the following format the request must be discarded from the body
@@ -40,6 +41,7 @@ body:{
 
 <hr>
 - `POST /api/auth/login`: Logs in an existing user.
+
 ### `POST /api/auth/login`
 
 Logs in an existing user with the provided email and password. The request should include a JSON payload in the following format:
@@ -56,6 +58,7 @@ body:{
 
 <hr>
 - `POST /api/journey/addJourney`: Logs in an existing user.
+
 ### `POST /api/journey/addJourney`
 
 Adds a new journey to the system with the provided journey data. The request should include a JSON payload in the following format:
