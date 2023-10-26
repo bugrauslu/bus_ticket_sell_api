@@ -1,4 +1,4 @@
-# **[bus_ticket_selling_api](https://github.com/bugrauslu/bus_ticket_selling_api)**
+# **[bus_ticket_sell_api](https://github.com/bugrauslu/bus_ticket_sell_api)**
 
 ## Installation
 
